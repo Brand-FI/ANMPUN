@@ -1,0 +1,26 @@
+package com.ubayadev.anmpun.viewmodel
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.ubayadev.anmpun.model.Habit
+
+class ListViewModel : ViewModel() {
+    val habitsLD = MutableLiveData<ArrayList<Habit>>()
+    val habitLoadErrorLD = MutableLiveData<Boolean>()
+    val loadingLD = MutableLiveData<Boolean>()
+
+    fun refresh() {
+        loadingLD.value = true
+        habitLoadErrorLD.value = false
+
+        val habit1 = Habit("Drink Water", "Stay hydrated", 3, 8, "glasses")
+        val habit2 = Habit("Jogging", "Morning run 5km", 1, 1, "session")
+        val habit3 = Habit("Read Book", "Read 10 pages", 0, 10, "pages")
+
+        habitsLD.value = arrayListOf(habit1, habit2, habit3)
+
+        habitLoadErrorLD.value = false
+        loadingLD.value = false
+    }
+
+}
