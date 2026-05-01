@@ -23,4 +23,9 @@ class ListViewModel : ViewModel() {
         loadingLD.value = false
     }
 
+    fun add(newHabit: Habit){
+        val currentList = habitsLD.value ?: arrayListOf()
+        currentList.add(newHabit)
+        habitsLD.value = currentList
+    }
 }
