@@ -27,6 +27,7 @@ class HabitListAdapter(val habitList: ArrayList<Habit>) :
         position: Int
     ) {
         val habit = habitList[position]
+        holder.binding.txtIcon.text = habit.iconUrl
         holder.binding.txtTitle.text = habit.name
         holder.binding.txtDesc.text = habit.description
         holder.binding.txtProgress.text = "${habit.currentProgress} / ${habit.goal} ${habit.unit}"

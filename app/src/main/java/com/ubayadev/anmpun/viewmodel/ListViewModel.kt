@@ -9,15 +9,25 @@ class ListViewModel : ViewModel() {
     val habitLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
+    init {
+        initialHabits()
+        refresh()
+    }
+
+    fun initialHabits(){
+        val habit1 = Habit("Drink Water", "Stay hydrated", 3, 8, "glasses", "💧")
+        val habit2 = Habit("Jogging", "Morning run 5km", 1, 1, "session", "🏃‍")
+        val habit3 = Habit("Read Book", "Read 10 pages", 0, 10, "pages", "📚")
+
+        habitsLD.value = arrayListOf(habit1, habit2, habit3)
+    }
+
     fun refresh() {
         loadingLD.value = true
         habitLoadErrorLD.value = false
 
-        val habit1 = Habit("Drink Water", "Stay hydrated", 3, 8, "glasses")
-        val habit2 = Habit("Jogging", "Morning run 5km", 1, 1, "session")
-        val habit3 = Habit("Read Book", "Read 10 pages", 0, 10, "pages")
-
-        habitsLD.value = arrayListOf(habit1, habit2, habit3)
+        val currentList = habitsLD.value ?: arrayListOf()
+        habitsLD.value = currentList
 
         habitLoadErrorLD.value = false
         loadingLD.value = false

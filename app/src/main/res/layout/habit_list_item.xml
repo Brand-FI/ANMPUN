@@ -22,14 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="173dp">
 
-            <ImageView
-                android:id="@+id/imgIcon"
+            <TextView
+                android:id="@+id/txtIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
-                android:background="@android:drawable/btn_star_big_on"
-                android:scaleType="centerCrop"
+                android:gravity="center"
+                android:text="😅"
+                android:textAlignment="center"
+                android:textSize="34sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,11 +41,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Progress"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+                app:layout_constraintTop_toBottomOf="@+id/txtIcon" />
 
             <TextView
                 android:id="@+id/txtProgress"
@@ -60,11 +63,11 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:text="Drink Water"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imgIcon"
+                app:layout_constraintStart_toEndOf="@+id/txtIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -123,11 +126,12 @@
                 android:id="@+id/txtDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/imgIcon"
+                app:layout_constraintStart_toEndOf="@+id/txtIcon"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
