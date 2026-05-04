@@ -28,7 +28,7 @@ class NewHabitFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
 
         val items = arrayOf("💧", "🏃‍♀️", "💪", "📚", "🛏️", "💤",
                             "🍎", "🥗", "⚽", "🏀", "🎾", "🏸",
@@ -68,7 +68,7 @@ class NewHabitFragment : Fragment() {
                 viewModel.add(newHabit)
                 viewModel.refresh()
                 val action = NewHabitFragmentDirections.actionNewToDashboard()
-                it.findNavController().navigate(action)
+                view.findNavController().navigate(action)
             } else {
                 Toast.makeText(requireContext(), filled, Toast.LENGTH_SHORT).show()
             }

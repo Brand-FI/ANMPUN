@@ -33,6 +33,7 @@
         android:label="NewHabitFragment" >
         <action
             android:id="@+id/actionNewToDashboard"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment" />
     </fragment>
 </navigation>
