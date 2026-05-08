@@ -18,7 +18,7 @@ import com.ubayadev.anmpun.viewmodel.ListViewModel
 class DashboardFragment : Fragment() {
 
     private lateinit var viewModel: ListViewModel
-    private val habitListAdapter = HabitListAdapter(arrayListOf())
+    private lateinit var habitListAdapter: HabitListAdapter
     private lateinit var binding: FragmentDashboardBinding
 
 
@@ -34,12 +34,15 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        //pindah ke sini butuh param viewModel
+        habitListAdapter = HabitListAdapter(arrayListOf(), viewModel)
 
         binding.recViewHabit.layoutManager = LinearLayoutManager(context)
         binding.recViewHabit.adapter = habitListAdapter
 
         observeViewModel()
+        viewModel.refresh()
 
         binding.refreshLayout.setOnRefreshListener {
             binding.recViewHabit.visibility = View.GONE

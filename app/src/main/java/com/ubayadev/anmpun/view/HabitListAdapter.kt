@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ubayadev.anmpun.databinding.HabitListItemBinding
 import com.ubayadev.anmpun.model.Habit
+import com.ubayadev.anmpun.viewmodel.ListViewModel
 
-class HabitListAdapter(val habitList: ArrayList<Habit>) :
+class HabitListAdapter(val habitList: ArrayList<Habit>,
+                       private val viewModel: ListViewModel) :
     RecyclerView.Adapter<HabitListAdapter.HabitViewHolder>() {
     class HabitViewHolder(var binding: HabitListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -43,16 +45,13 @@ class HabitListAdapter(val habitList: ArrayList<Habit>) :
         }
 
         holder.binding.btnAdd.setOnClickListener {
-            if (habit.currentProgress < habit.goal) {
-                habit.currentProgress++
-                notifyItemChanged(position)
-            }
+            viewModel.increaseProgress(position)
+            notifyItemChanged(position)
         }
+
         holder.binding.btnSub.setOnClickListener {
-            if (habit.currentProgress > 0) {
-                habit.currentProgress--
-                notifyItemChanged(position)
-            }
+            viewModel.decreaseProgress(position)
+            notifyItemChanged(position)
         }
 
     }

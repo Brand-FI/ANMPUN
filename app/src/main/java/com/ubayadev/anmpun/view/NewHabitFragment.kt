@@ -12,10 +12,10 @@ import androidx.navigation.findNavController
 import com.ubayadev.anmpun.R
 import com.ubayadev.anmpun.databinding.FragmentNewHabitBinding
 import com.ubayadev.anmpun.model.Habit
-import com.ubayadev.anmpun.viewmodel.ListViewModel
+import com.ubayadev.anmpun.viewmodel.NewHabitViewModel
 
 class NewHabitFragment : Fragment() {
-    private lateinit var viewModel: ListViewModel
+    private lateinit var viewModel: NewHabitViewModel
     private lateinit var binding: FragmentNewHabitBinding
 
     override fun onCreateView(
@@ -28,11 +28,12 @@ class NewHabitFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(NewHabitViewModel::class.java)
 
         val items = arrayOf("💧", "🏃‍♀️", "💪", "📚", "🛏️", "💤",
                             "🍎", "🥗", "⚽", "🏀", "🎾", "🏸",
                             "🧰", "📊", "🛍️", "🛒", "🧹", "💊", "🙏")
+
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnIcon.adapter = adapter
@@ -66,9 +67,9 @@ class NewHabitFragment : Fragment() {
             {
                 val newHabit = Habit(name, desc, 0, Integer.parseInt(goal), unit, icon)
                 viewModel.add(newHabit)
-                viewModel.refresh()
                 val action = NewHabitFragmentDirections.actionNewToDashboard()
                 view.findNavController().navigate(action)
+                Toast.makeText(requireContext(), "Habit Baru telah dibuat", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), filled, Toast.LENGTH_SHORT).show()
             }
