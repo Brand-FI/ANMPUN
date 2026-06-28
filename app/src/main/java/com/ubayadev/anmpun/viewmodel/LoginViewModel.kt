@@ -4,28 +4,33 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import buildDb
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.ubayadev.anmpun.model.Habit
-import com.ubayadev.anmpun.util.FileHelper
+import com.ubayadev.anmpun.util.SessionHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class NewHabitViewModel(application: Application) :
+class LoginViewModel(application: Application) :
     AndroidViewModel(application), CoroutineScope {
 
-    private val job = Job()
+    val loginResult = MutableLiveData<Boolean>()
+    val sessionHelper = SessionHelper(application)
+    private var job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
-    fun add(newHabit: Habit) {
+    fun isLogin() = sessionHelper.isLogin()
+    fun login(username: String, password: String) {
         launch {
             val db = buildDb(getApplication())
-            db.habitDao().insertAll(newHabit)
+            val user = db.userDao().login(username, password)
+            if (user != null) {
+                sessionHelper.setLogin(true)
+            }
+            loginResult.postValue(user != null)
         }
     }
+
 }

@@ -7,9 +7,8 @@ import com.ubayadev.anmpun.databinding.HabitListItemBinding
 import com.ubayadev.anmpun.model.Habit
 import com.ubayadev.anmpun.viewmodel.ListViewModel
 
-class HabitListAdapter(val habitList: ArrayList<Habit>,
-                       private val viewModel: ListViewModel) :
-    RecyclerView.Adapter<HabitListAdapter.HabitViewHolder>() {
+class HabitListAdapter(val habitList: ArrayList<Habit>, val listener: HabitListListener) :
+    RecyclerView.Adapter<HabitListAdapter.HabitViewHolder>(){
     class HabitViewHolder(var binding: HabitListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -28,32 +27,8 @@ class HabitListAdapter(val habitList: ArrayList<Habit>,
         holder: HabitViewHolder,
         position: Int
     ) {
-        val habit = habitList[position]
-        holder.binding.txtIcon.text = habit.iconUrl
-        holder.binding.txtTitle.text = habit.name
-        holder.binding.txtDesc.text = habit.description
-        holder.binding.txtProgress.text = "${habit.currentProgress} / ${habit.goal} ${habit.unit}"
-        holder.binding.progressBar.max = habit.goal
-        holder.binding.progressBar.progress = habit.currentProgress
-
-        if (habit.currentProgress >= habit.goal) {
-            holder.binding.txtStatus.text = "Completed"
-            holder.binding.txtStatus.setChipBackgroundColorResource(android.R.color.holo_green_light)
-        } else {
-            holder.binding.txtStatus.text = "In Progress"
-            holder.binding.txtStatus.setChipBackgroundColorResource(android.R.color.darker_gray)
-        }
-
-        holder.binding.btnAdd.setOnClickListener {
-            viewModel.increaseProgress(position)
-            notifyItemChanged(position)
-        }
-
-        holder.binding.btnSub.setOnClickListener {
-            viewModel.decreaseProgress(position)
-            notifyItemChanged(position)
-        }
-
+        holder.binding.habit = habitList[position]
+        holder.binding.listener = listener
     }
 
     override fun getItemCount(): Int {
@@ -61,7 +36,7 @@ class HabitListAdapter(val habitList: ArrayList<Habit>,
 
     }
 
-    fun updateHabitList(newHabitList: ArrayList<Habit>) {
+    fun updateHabitList(newHabitList: List<Habit>) {
         habitList.clear()
         habitList.addAll(newHabitList)
         notifyDataSetChanged()

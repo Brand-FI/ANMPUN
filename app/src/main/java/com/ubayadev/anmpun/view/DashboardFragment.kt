@@ -13,9 +13,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubayadev.anmpun.R
 import com.ubayadev.anmpun.databinding.FragmentDashboardBinding
+import com.ubayadev.anmpun.model.Habit
 import com.ubayadev.anmpun.viewmodel.ListViewModel
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), HabitListListener {
 
     private lateinit var viewModel: ListViewModel
     private lateinit var habitListAdapter: HabitListAdapter
@@ -36,7 +37,7 @@ class DashboardFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         //pindah ke sini butuh param viewModel
-        habitListAdapter = HabitListAdapter(arrayListOf(), viewModel)
+        habitListAdapter = HabitListAdapter(arrayListOf(), this)
 
         binding.recViewHabit.layoutManager = LinearLayoutManager(context)
         binding.recViewHabit.adapter = habitListAdapter
@@ -84,6 +85,14 @@ class DashboardFragment : Fragment() {
             }
         })
 
+    }
+
+    override fun onIncrease(habit: Habit) {
+        viewModel.increaseProgress(habit)
+    }
+
+    override fun onDecrease(habit: Habit) {
+        viewModel.decreaseProgress(habit)
     }
 
 
