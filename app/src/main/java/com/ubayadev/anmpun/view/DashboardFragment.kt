@@ -95,5 +95,8 @@ class DashboardFragment : Fragment(), HabitListListener {
         viewModel.decreaseProgress(habit)
     }
 
-
+    override fun onClick(v: View, habit: Habit){
+        val action = DashboardFragmentDirections.actionDashboardToEdit(habit.uuid)
+        v.findNavController().navigate(action)
+    }
 }

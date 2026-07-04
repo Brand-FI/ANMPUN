@@ -1,5 +1,6 @@
 package com.ubayadev.anmpun.model
 
+import androidx.databinding.InverseMethod
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,17 +17,17 @@ data class User(
 @Entity
 data class Habit(
     @ColumnInfo(name="name")
-    val name: String,
+    var name: String,
     @ColumnInfo(name="description")
-    val description:String,
+    var description:String,
     @ColumnInfo(name="currentProgress")
     var currentProgress:Int,
     @ColumnInfo(name="goal")
-    val goal:Int,
+    var goal:Int,
     @ColumnInfo(name="unit")
-    val unit:String,
+    var unit:String,
     @ColumnInfo(name="iconUrl")
-    val iconUrl:String? = null
+    var iconUrl:String? = null
 )
 {
     @PrimaryKey(autoGenerate = true)
@@ -38,5 +39,14 @@ data class Habit(
         } else {
             "In Progress"
         }
+    }
+
+    @InverseMethod("stringToInt")
+    fun intToString(value: Int?):String{
+        return value.toString()
+    }
+
+    fun stringToInt(value: String): Int? {
+        return value.toIntOrNull()
     }
 }

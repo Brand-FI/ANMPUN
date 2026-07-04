@@ -18,6 +18,7 @@ class NewHabitViewModel(application: Application) :
     AndroidViewModel(application), CoroutineScope {
 
     private val job = Job()
+    val habitLD = MutableLiveData<Habit>()
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
@@ -26,6 +27,20 @@ class NewHabitViewModel(application: Application) :
         launch {
             val db = buildDb(getApplication())
             db.habitDao().insertAll(newHabit)
+        }
+    }
+
+    fun fetch(uuid:Int) {
+        launch {
+            val db = buildDb(getApplication())
+            habitLD.postValue(db.habitDao().selectTodo(uuid))
+        }
+    }
+
+    fun update(habit: Habit) {
+        launch {
+            val db = buildDb(getApplication())
+            db.habitDao().updateHabit(habit)
         }
     }
 }

@@ -78,6 +78,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
                     android:text="@{habit.name}"
+                    android:onClick="@{(v) -> listener.onClick(v, habit)}"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/txtIcon"
                     app:layout_constraintTop_toTopOf="parent" />
