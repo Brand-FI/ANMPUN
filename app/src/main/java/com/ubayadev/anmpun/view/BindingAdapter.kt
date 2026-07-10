@@ -16,7 +16,3 @@ fun setStatusColor(chip: Chip, status: String) {
         )
     }
 }
-@BindingAdapter("intText")
-fun setIntText(view: EditText, value: Int) {
-    view.setText(value.toString())
-}

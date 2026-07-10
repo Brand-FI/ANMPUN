@@ -58,9 +58,7 @@ class EditHabitFragment : Fragment(), EditHabitListener {
     }
 
     override fun onClick(v: View) {
-        binding.habit!!.goal = binding.txtGoal.text.toString().toInt()
         binding.habit!!.iconUrl = binding.spnIcon.selectedItem.toString()
-        binding.habit!!.goal = binding.txtGoal.text.toString().toInt()
         viewModel.update(binding.habit!!)
 
         Toast.makeText(context, "Habit Updated", Toast.LENGTH_SHORT).show()
