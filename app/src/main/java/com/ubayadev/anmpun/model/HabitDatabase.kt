@@ -42,7 +42,7 @@ abstract class HabitDatabase : RoomDatabase() {
                             currentProgress = 1,
                             goal = 1,
                             unit = "session",
-                            iconUrl = "🏃"
+                            iconUrl = "🏃‍♀️"
                         ),
                         Habit(
                             name = "Read Book",

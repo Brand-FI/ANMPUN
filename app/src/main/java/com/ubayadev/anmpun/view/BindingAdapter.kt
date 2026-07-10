@@ -1,5 +1,6 @@
 package com.ubayadev.anmpun.view
 
+import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.Chip
 
@@ -14,4 +15,8 @@ fun setStatusColor(chip: Chip, status: String) {
             android.R.color.darker_gray
         )
     }
+}
+@BindingAdapter("intText")
+fun setIntText(view: EditText, value: Int) {
+    view.setText(value.toString())
 }

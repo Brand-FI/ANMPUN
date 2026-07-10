@@ -40,13 +40,4 @@ data class Habit(
             "In Progress"
         }
     }
-
-    @InverseMethod("stringToInt")
-    fun intToString(value: Int?):String{
-        return value.toString()
-    }
-
-    fun stringToInt(value: String): Int? {
-        return value.toIntOrNull()
-    }
 }
